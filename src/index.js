@@ -1,6 +1,7 @@
-board = buildBoard(10)
+board = buildBoard(4)
 console.log(board)
-renderBoard(board)
+boardElement = buildBoardElement(board)
+root.appendChild(boardElement)
 
 function handleBoardClick(row, col){
     board[row][col] = 1

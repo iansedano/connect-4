@@ -1,9 +1,9 @@
 const d = document
 
-function c(tag, content, cssClass = null) {
+function c(tag, content = null, cssClass = null) {
     element = d.createElement(tag)
-    element.innerText = content
-    if (cssClass) element.classList.add(cssClass)
+    if (content != null) element.innerText = content
+    if (cssClass!= null) element.classList.add(cssClass)
     return element
 }
 
