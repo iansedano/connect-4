@@ -13,7 +13,7 @@ function buildBoardElement(board){
 
 
 function createCell(value, row, col){
-    console.log(value, row, col)
+    // Top left cell may be hidden by live reload DOM
     const cell = c("span", value, "cell");
     if (value == 0) {
         cell.addEventListener("click", e => {
