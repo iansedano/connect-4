@@ -14,10 +14,8 @@ function buildBoardElement(board){
 
 function createCell(value, row, col){
     const cell = c("td", value, "cell");
-    if (value == 0) {
-        cell.addEventListener("click", e => {
-            handleBoardClick(row, col)
-        })
-    }
+    cell.addEventListener("click", e => {
+        handleBoardClick(row, col)
+    })
     return cell
 }
