@@ -1,7 +1,7 @@
 function buildBoardElement(board){
-    let boardElement = c("div", null,"board")
+    let boardElement = c("table", null,"board")
     board.forEach((row, i) => {
-        const rowElement = c("div", null,"board-row")
+        const rowElement = c("tr", null,"board-row")
         row.forEach((value, j) => {
             const cell = createCell(value, i, j)
             rowElement.appendChild(cell)
@@ -13,8 +13,7 @@ function buildBoardElement(board){
 
 
 function createCell(value, row, col){
-    // Top left cell may be hidden by live reload DOM
-    const cell = c("span", value, "cell");
+    const cell = c("td", value, "cell");
     if (value == 0) {
         cell.addEventListener("click", e => {
             handleBoardClick(row, col)
