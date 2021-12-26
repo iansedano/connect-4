@@ -16,9 +16,9 @@ function createCell(value, row, col) {
 	if (value !== 0) {
 		const img = c("img", null, "piece");
 		if (value === 1) {
-			img.src = "../../imgs/black.jpg";
+			img.src = "../imgs/black.jpg";
 		} else if (value === 2) {
-			img.src = "../../imgs/red.jpg";
+			img.src = "../imgs/red.jpg";
 		}
 		img.height = 40;
 		img.width = 40;
@@ -29,6 +29,7 @@ function createCell(value, row, col) {
 	});
 	return cell;
 }
+
 
 function refreshBoard() {
 	boardElement = buildBoardElement(board);
