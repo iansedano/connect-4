@@ -11,6 +11,11 @@ function buildBoardElement(board){
     return boardElement
 }
 
+function refreshBoard(){
+    boardElement = buildBoardElement(board)
+    root.innerHTML = ""
+    root.appendChild(boardElement)
+}
 
 function createCell(value, row, col){
     const cell = c("td", null, "cell");
