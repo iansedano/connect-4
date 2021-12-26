@@ -43,14 +43,16 @@ function updateBoard(row, col) {
 }
 
 function isConnectFour() {
-	for (const [i, row] of board.entries()) {
-		for (const [j, cell] of row.entries()) {
+	
+	for (let i=0; i<board.length - 3;i++){
+		for (let j=0; j<board[0].length - 3;j++){
 			const won = checkConnectFour(i, j);
 			if (won) {
 				return true;
 			}
 		}
 	}
+	
 	return false;
 }
 
@@ -70,6 +72,11 @@ const winningTransformations = [
 		[0, 2],
 		[0, 3],
 	],
+	[
+		[-1, 1],
+		[-2, 2],
+		[-3, 3],
+	]
 ];
 
 function checkConnectFour(row, col) {
