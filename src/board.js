@@ -43,16 +43,15 @@ function updateBoard(row, col) {
 }
 
 function isConnectFour() {
-	
-	for (let i=0; i<board.length - 3;i++){
-		for (let j=0; j<board[0].length - 3;j++){
+	for (const [i, row] of board.entries()) {
+		for (const [j, _] of row.entries()) {
 			const won = checkConnectFour(i, j);
 			if (won) {
 				return true;
 			}
 		}
 	}
-	
+
 	return false;
 }
 
@@ -76,21 +75,27 @@ const winningTransformations = [
 		[-1, 1],
 		[-2, 2],
 		[-3, 3],
-	]
+	],
 ];
 
 function checkConnectFour(row, col) {
 	for (const line of winningTransformations) {
 		const positions = [
 			board[row][col],
-			...line.map((transform) => board[row + transform[0]][col + transform[1]]),
+			...line.map((transform) => {
+				if (row + transform[0] >= board.length || row + transform[0] < 0)
+					return null;
+				if (col + transform[1] >= board[0].length || col + transform[1] < 0)
+					return null;
+				return board[row + transform[0]][col + transform[1]];
+			}),
 		];
-		if (positions.every(pos => pos === 1)){
-			return true
-		} else if (positions.every(pos => pos === 2)) {
-			return true
+		if (positions.every((pos) => pos === 1)) {
+			return true;
+		} else if (positions.every((pos) => pos === 2)) {
+			return true;
 		}
 	}
-	
-	return false
+
+	return false;
 }
