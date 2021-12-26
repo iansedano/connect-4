@@ -8,6 +8,7 @@ function buildBoardElement(board){
         })
         boardElement.appendChild(rowElement)
     })
+    boardElement.addEventListener("click", handleBoardClick)
     return boardElement
 }
 
@@ -25,8 +26,13 @@ function createCell(value, row, col){
         img.width = 40
         cell.appendChild(img)
     }       
-    cell.addEventListener("click", e => {
-        handleBoardClick(row, col)
-    })
+    cell.setAttribute("row", row)
+	cell.setAttribute("col", col)
     return cell
+}
+
+
+function handleBoardClick(e){
+    if (!e.target.classList.contains("cell")) return null
+    updateBoard(e.target.getAttribute('row'), e.target.getAttribute('col'))
 }
