@@ -36,62 +36,54 @@ function updateBoard(row, col) {
 		board[row][col] = turn;
 	} else {
 		alert("invalid move");
-        return;
+		return;
 	}
 
 	updateTurn();
 }
 
-function isConnectFour(row, col) {
-	// setting up cardinal directions
-	const N = [-1, 0];
-	const NE = [-1, 1];
-	const E = [0, 1];
-	const SE = [1, 1];
-	const S = [1, 0];
-	const SW = [1, -1];
-	const W = [0, -1];
-	const NW = [1, -1];
-
-	const axes = [
-		[N, S],
-		[NE, SW],
-		[E, W],
-		[SE, NW],
-	];
-
-	output = 0;
-	axes.forEach((axis) => {
-		const directionOne = howFarExtends(axis[0], [row, col]);
-		const directionTwo = howFarExtends(axis[1], [row, col]);
-		if (directionOne + directionTwo + 1 > 3) {
-			console.log("winner!!");
-			output = board[row][col];
+function isConnectFour() {
+	for (const [i, row] of board.entries()) {
+		for (const [j, cell] of row.entries()) {
+			const won = checkConnectFour(i, j);
+			if (won) {
+				return true;
+			}
 		}
-	});
-	return output;
-}
-
-function howFarExtends(direction, position, count = 0) {
-	const currentValue = board[position[0]][position[1]];
-	const newPosition = step(direction, position);
-
-	// Check if the
-	const isOutOfRange =
-		newPosition[0] >= boardSize ||
-		newPosition[1] >= boardSize ||
-		newPosition[0] < 0 ||
-		newPosition[1] < 0;
-
-	if (isOutOfRange) {
-		return count;
 	}
-	const newValue = board[newPosition[0]][newPosition[1]];
-	if (newValue === currentValue) {
-		return howFarExtends(direction, newPosition, count + 1);
-	} else return count;
+	return false;
 }
 
-function step(direction, position) {
-	return [position[0] + direction[0], position[1] + direction[1]];
+const winningTransformations = [
+	[
+		[1, 0],
+		[2, 0],
+		[3, 0],
+	],
+	[
+		[1, 1],
+		[2, 2],
+		[3, 3],
+	],
+	[
+		[0, 1],
+		[0, 2],
+		[0, 3],
+	],
+];
+
+function checkConnectFour(row, col) {
+	for (const line of winningTransformations) {
+		const positions = [
+			board[row][col],
+			...line.map((transform) => board[row + transform[0]][col + transform[1]]),
+		];
+		if (positions.every(pos => pos === 1)){
+			return true
+		} else if (positions.every(pos => pos === 2)) {
+			return true
+		}
+	}
+	
+	return false
 }
