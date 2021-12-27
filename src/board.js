@@ -80,16 +80,16 @@ const winningTransformations = [
 
 function checkConnectFour(row, col) {
 	for (const line of winningTransformations) {
-		const positions = [
-			board[row][col],
-			...line.map((transform) => {
-				if (row + transform[0] >= board.length || row + transform[0] < 0)
-					return null;
-				if (col + transform[1] >= board[0].length || col + transform[1] < 0)
-					return null;
-				return board[row + transform[0]][col + transform[1]];
-			}),
-		];
+		const threeNextPositions = line.map((transform) => {
+			const newRow = row + transform[0];
+			const newCol = col + transform[1];
+			if (newRow >= board.length || newRow < 0) return undefined;
+			if (newCol >= board[0].length || newCol < 0) return undefined;
+			return board[newRow][newCol];
+		});
+
+		const positions = [board[row][col], ...threeNextPositions];
+
 		if (positions.every((pos) => pos === 1)) {
 			return true;
 		} else if (positions.every((pos) => pos === 2)) {
