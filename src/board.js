@@ -55,11 +55,11 @@ function isConnectFour() {
 	return false;
 }
 
-const winningTransformations = [
+const lines = [
 	[
-		[1, 0],
-		[2, 0],
-		[3, 0],
+		[0, 1],
+		[0, 2],
+		[0, 3],
 	],
 	[
 		[1, 1],
@@ -67,9 +67,9 @@ const winningTransformations = [
 		[3, 3],
 	],
 	[
-		[0, 1],
-		[0, 2],
-		[0, 3],
+		[1, 0],
+		[2, 0],
+		[3, 0],
 	],
 	[
 		[-1, 1],
@@ -79,7 +79,7 @@ const winningTransformations = [
 ];
 
 function checkConnectFour(row, col) {
-	for (const line of winningTransformations) {
+	for (const line of lines) {
 		const threeNextPositions = line.map((transform) => {
 			const newRow = row + transform[0];
 			const newCol = col + transform[1];
