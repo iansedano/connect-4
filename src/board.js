@@ -45,6 +45,7 @@ function updateBoard(row, col) {
 function isConnectFour() {
 	for (const [i, row] of board.entries()) {
 		for (const [j, _] of row.entries()) {
+			console.log(i, j)
 			const won = checkConnectFour(i, j);
 			if (won) {
 				return true;
@@ -72,9 +73,9 @@ const lines = [
 		[3, 0],
 	],
 	[
-		[-1, 1],
-		[-2, 2],
-		[-3, 3],
+		[1, -1],
+		[2, -2],
+		[3, -3],
 	],
 ];
 
